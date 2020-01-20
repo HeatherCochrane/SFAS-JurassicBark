@@ -140,6 +140,10 @@ public class Game : MonoBehaviour
 	Events events;
 
 
+	//Deleting paddocks
+	GameObject deletionScreen;
+	GameObject deletingObject;
+
 	void Start()
     {
         mRaycastHits = new RaycastHit[NumberOfRaycastHits];
@@ -151,6 +155,7 @@ public class Game : MonoBehaviour
 		paddockProfile = GameObject.Find("PaddockStats");
 		actionSprite = GameObject.Find("Sprite");
 		profile = GameObject.Find("DogStats");
+		deletionScreen = GameObject.Find("PaddockDeletion");
 
 		//Setting up gameobjects with the appropriate scripts
 		paddockHandle = GameObject.Find("PaddockHandler").GetComponent<PaddockHandler>();
@@ -174,6 +179,7 @@ public class Game : MonoBehaviour
 
 		pauseScreen.SetActive(false);
 		tutorialScreen.SetActive(false);
+		deletionScreen.SetActive(false);
 
 			ShowMenu(true);
 	}
@@ -660,7 +666,18 @@ public class Game : MonoBehaviour
 		//Only change the tile is it is appropriate
 		if (Input.GetMouseButtonDown(0))
 		{
-			if (!tile.IsAccessible && !tile.isPaddock)
+			Ray screenClick = MainCamera.ScreenPointToRay(Input.mousePosition);
+
+			if (Physics.Raycast(screenClick, out mRaycastHits[0]))
+			{
+				if (mRaycastHits[0].transform.tag == "Paddock")
+				{
+					deletionScreen.SetActive(true);
+					deletingObject = mRaycastHits[0].transform.gameObject;
+				}
+			}
+
+			else if (!tile.IsAccessible && !tile.isPaddock)
 			{
 				//Remove the object on top of the tile and set it to accessible
 				if (tile.gameObject.transform.childCount > 0)
@@ -708,6 +725,7 @@ public class Game : MonoBehaviour
 				tile.GetComponent<Renderer>().materials[1].color = grassColours[ran];
 				currency.addIncome(pathCost);
 			}
+
 		}
 	}
 
@@ -906,5 +924,28 @@ public class Game : MonoBehaviour
 		{
 			pauseScreen.SetActive(true);
 		}
+	}
+
+	public void deletePad(bool deletePaddock)
+	{
+		if(deletePaddock)
+		{
+			GameObject tileParent = deletingObject.transform.parent.parent.gameObject;
+			tileParent.GetComponent<Paddock>().emptyPaddock();
+
+
+
+			Destroy(deletingObject.transform.parent.gameObject);
+			tileParent.transform.DetachChildren();
+
+			Destroy(tileParent);
+		}
+	
+		deletionScreen.SetActive(false);
+		actionSprite.SetActive(false);
+		deletePaddock = false;
+		removingDebris = false;
+		
+
 	}
 }

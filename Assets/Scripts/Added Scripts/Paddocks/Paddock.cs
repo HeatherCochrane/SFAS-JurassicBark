@@ -64,9 +64,14 @@ public class Paddock : MonoBehaviour
 	int numOfDogsAvaliable = 0;
 	int dogCount = 0;
 
+	List<Color32> grassColours = new List<Color32>();
+
 	// Start is called before the first frame update
 	void Start()
     {
+		grassColours.Add(new Color32(98, 214, 164, 1));
+		grassColours.Add(new Color32(122, 221, 159, 1));
+		grassColours.Add(new Color32(105, 229, 140, 1));
 	}
 
     // Update is called once per frame
@@ -188,5 +193,19 @@ public class Paddock : MonoBehaviour
 		}
 
 		return paddockTiles;
+	}
+
+	public void emptyPaddock()
+	{
+		dogsInPaddock.Clear();
+
+		for(int i=0; i < paddockTiles.Count; i++)
+		{
+			paddockTiles[i].GetComponent<EnvironmentTile>().IsAccessible = true;
+			paddockTiles[i].GetComponent<EnvironmentTile>().isPaddock = false;
+			paddockTiles[i].GetComponent<Renderer>().materials[1].color = grassColours[Random.Range(0, grassColours.Count)];
+		}
+
+		paddockTiles.Clear();
 	}
 }
