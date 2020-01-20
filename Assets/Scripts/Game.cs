@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 
 public class Game : MonoBehaviour
@@ -145,7 +146,6 @@ public class Game : MonoBehaviour
         mMap = GetComponentInChildren<Environment>();
       //  mCharacter = Instantiate(Character, transform);
 		Character.setCharacterType(1);
-		ShowMenu(true);
 
 		//Setting up gameobjects
 		paddockProfile = GameObject.Find("PaddockStats");
@@ -175,6 +175,7 @@ public class Game : MonoBehaviour
 		pauseScreen.SetActive(false);
 		tutorialScreen.SetActive(false);
 
+			ShowMenu(true);
 	}
 
 	private void Update()
@@ -739,7 +740,8 @@ public class Game : MonoBehaviour
 
 	public void ShowMenu(bool show)
     {
-        if (Menu != null && Hud != null)
+
+		if (Menu != null && Hud != null)
         {
             Menu.enabled = show;
             Hud.enabled = !show;
@@ -905,5 +907,4 @@ public class Game : MonoBehaviour
 			pauseScreen.SetActive(true);
 		}
 	}
-
 }

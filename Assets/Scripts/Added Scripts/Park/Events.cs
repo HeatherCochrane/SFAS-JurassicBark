@@ -16,8 +16,6 @@ public class Events : MonoBehaviour
 			{
 				if (timer > 60)
 				{
-					Debug.Log("HOOLIGAN LEFT");
-
 					hooliganCaught(false);
 					timer = 0;
 					eventActive = false;
@@ -43,7 +41,6 @@ public class Events : MonoBehaviour
 			yield return new WaitForSeconds(1);
 		}
 	}
-	// Start is called before the first frame update
 
 	bool eventActive = false;
 	int timer = 0;

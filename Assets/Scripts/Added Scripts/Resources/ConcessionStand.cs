@@ -140,7 +140,6 @@ public class ConcessionStand : MonoBehaviour
 				//If it is a path, the shop can be accessed by customers
 				pathConnecting = true;
 				incomeSprite.GetComponent<SpriteRenderer>().sprite = producing;
-				Debug.Log("PATH CONNECTING");
 				return true;
 			}
 			else
