@@ -42,25 +42,28 @@ public class Park : MonoBehaviour
 
 	public int generateHappinessAverage()
 	{
-		checkPaddocks();
-
-		if (paddocksInPark.Count > 0 && count > 0)
+		if (paddocksInPark.Count > 0)
 		{
-			averageHappiness = 0;
-			count = 0;
-
 			checkPaddocks();
 
-			if (count != 0)
+			if (paddocksInPark.Count > 0 && count > 0)
 			{
-				//Only divide by the paddocks that have dogs within them
-				averageHappiness = averageHappiness / count;
+				averageHappiness = 0;
+				count = 0;
+
+				checkPaddocks();
+
+				if (count != 0)
+				{
+					//Only divide by the paddocks that have dogs within them
+					averageHappiness = averageHappiness / count;
+				}
+
+				clampValues(count);
+
+				stats.happiness = averageHappiness;
+				parkHappiness.text = "Park Happiness: " + averageHappiness.ToString();
 			}
-
-			clampValues(count);
-
-			stats.happiness = averageHappiness;
-			parkHappiness.text = "Park Happiness: " + averageHappiness.ToString();
 		}
 
 		return averageHappiness;
@@ -132,6 +135,10 @@ public class Park : MonoBehaviour
 	public void addPaddock(GameObject pad)
 	{
 		paddocksInPark.Add(pad);
+	}
+	public void deletePaddock(GameObject pad)
+	{
+		paddocksInPark.Remove(pad);
 	}
 
 	public int getAdmissionCost()

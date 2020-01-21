@@ -633,9 +633,7 @@ public class Game : MonoBehaviour
 								dogB.setPaddock(tile.GetComponentInParent<Paddock>().getPaddock());
 								dogB.setPaddockTiles(tile.GetComponentInParent<Paddock>().getPaddockTiles());
 
-
 								interactingPaddock = mRaycastHits[0].transform.GetComponentInParent<Paddock>().getPaddock();
-								interactingPaddock.updateDogList(dogClone);
 
 								placingDog = false;
 
@@ -668,62 +666,65 @@ public class Game : MonoBehaviour
 		{
 			Ray screenClick = MainCamera.ScreenPointToRay(Input.mousePosition);
 
-			if (Physics.Raycast(screenClick, out mRaycastHits[0]))
+
+			if (tile != null)
+			{
+				if (!tile.IsAccessible && !tile.isPaddock)
+				{
+					//Remove the object on top of the tile and set it to accessible
+					if (tile.gameObject.transform.childCount > 0)
+					{
+						//SHOPS
+						if (tile.gameObject.transform.GetChild(0).GetComponent<ConcessionStand>())
+						{
+							shops.Remove(tile.gameObject.transform.GetChild(0).gameObject);
+							//Give back shop money
+							currency.addIncome(shopCost);
+
+							//Delete the object
+							Destroy(tile.gameObject.transform.GetChild(0).gameObject);
+
+							tile.IsAccessible = true;
+						}
+						//DECORATIONS
+						else if (tile.gameObject.transform.GetChild(0).tag == "Decoration")
+						{
+							//Give back the money for destoying decorations
+							currency.addIncome(decorationCost);
+							//Delete the object
+							Destroy(tile.gameObject.transform.GetChild(0).gameObject);
+
+							tile.IsAccessible = true;
+						}
+						//DEBRIS
+						else if (currency.sufficientFunds(5))
+						{
+							//clearing debris costs money
+							currency.takeIncome(5);
+
+							//Delete the object
+							Destroy(tile.gameObject.transform.GetChild(0).gameObject);
+
+							tile.IsAccessible = true;
+						}
+					}
+				}
+				//PATHS
+				else if (tile.isPath)
+				{
+					tile.isPath = false;
+					int ran = Random.Range(0, grassColours.Count);
+					tile.GetComponent<Renderer>().materials[1].color = grassColours[ran];
+					currency.addIncome(pathCost);
+				}
+			}
+			else if (Physics.Raycast(screenClick, out mRaycastHits[0]))
 			{
 				if (mRaycastHits[0].transform.tag == "Paddock")
 				{
 					deletionScreen.SetActive(true);
 					deletingObject = mRaycastHits[0].transform.gameObject;
 				}
-			}
-
-			else if (!tile.IsAccessible && !tile.isPaddock)
-			{
-				//Remove the object on top of the tile and set it to accessible
-				if (tile.gameObject.transform.childCount > 0)
-				{
-					//SHOPS
-					if(tile.gameObject.transform.GetChild(0).GetComponent<ConcessionStand>())
-					{
-						shops.Remove(tile.gameObject.transform.GetChild(0).gameObject);
-						//Give back shop money
-						currency.addIncome(shopCost);
-
-						//Delete the object
-						Destroy(tile.gameObject.transform.GetChild(0).gameObject);
-
-						tile.IsAccessible = true;
-					}
-					//DECORATIONS
-					else if(tile.gameObject.transform.GetChild(0).tag == "Decoration")
-					{
-						//Give back the money for destoying decorations
-						currency.addIncome(decorationCost);
-						//Delete the object
-						Destroy(tile.gameObject.transform.GetChild(0).gameObject);
-
-						tile.IsAccessible = true;
-					}
-					//DEBRIS
-					else if(currency.sufficientFunds(5))
-					{
-						//clearing debris costs money
-						currency.takeIncome(5);
-
-						//Delete the object
-						Destroy(tile.gameObject.transform.GetChild(0).gameObject);
-
-						tile.IsAccessible = true;
-					}
-				}
-			}
-			//PATHS
-			else if(tile.isPath)
-			{
-				tile.isPath = false;
-				int ran = Random.Range(0, grassColours.Count);
-				tile.GetComponent<Renderer>().materials[1].color = grassColours[ran];
-				currency.addIncome(pathCost);
 			}
 
 		}
@@ -928,17 +929,23 @@ public class Game : MonoBehaviour
 
 	public void deletePad(bool deletePaddock)
 	{
+		Transform newParent = GameObject.Find("Environment").transform;
+
 		if(deletePaddock)
 		{
-			GameObject tileParent = deletingObject.transform.parent.parent.gameObject;
-			tileParent.GetComponent<Paddock>().emptyPaddock();
+			List<EnvironmentTile> tiles = deletingObject.GetComponentInParent<Paddock>().getPaddockTiles();
+
+			for (int i = 0; i < tiles.Count; i++)
+			{
+				tiles[i].isPaddock = false;
+				tiles[i].IsAccessible = true;
+				tiles[i].transform.parent = newParent;
+			}
+
+			deletingObject.transform.parent.parent.GetComponent<Paddock>().emptyPaddock();
 
 
-
-			Destroy(deletingObject.transform.parent.gameObject);
-			tileParent.transform.DetachChildren();
-
-			Destroy(tileParent);
+			Destroy(deletingObject.transform.parent.parent.gameObject);
 		}
 	
 		deletionScreen.SetActive(false);

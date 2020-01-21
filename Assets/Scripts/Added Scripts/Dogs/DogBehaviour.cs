@@ -80,6 +80,8 @@ public class DogBehaviour : Character
 
 	void setUpDog()
 	{
+		paddock.updateDogList(this.gameObject);
+
 		rand = Random.Range(0, names.Count);
 
 		//Will randomly pick name
@@ -90,6 +92,8 @@ public class DogBehaviour : Character
 		this.gameObject.name = stats.name;
 
 		this.setCharacterType(3);
+
+		this.gameObject.transform.parent.transform.parent = paddock.gameObject.transform;
 
 		paddock.updateHappiness();
 	}

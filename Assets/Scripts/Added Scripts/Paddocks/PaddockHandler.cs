@@ -82,6 +82,10 @@ public class PaddockHandler : MonoBehaviour
 	{
 		paddocksPlaced.Add(newPad);
 	}
+	public void deletePaddock(GameObject pad)
+	{
+		paddocksPlaced.Remove(pad);
+	}
 
 	public List<GameObject> getPaddocks()
 	{

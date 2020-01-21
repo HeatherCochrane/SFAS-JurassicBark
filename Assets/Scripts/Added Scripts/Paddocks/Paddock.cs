@@ -13,12 +13,13 @@ struct PaddockStats
 
 public class Paddock : MonoBehaviour
 {
+	PaddockHandler handler;
 	PaddockStats stats;
 	Park park;
 
 	int hungerDrainRate = 0;
 
-	List<GameObject> dogsInPaddock = new List<GameObject>();
+	public List<GameObject> dogsInPaddock = new List<GameObject>();
 
 	List<EnvironmentTile> paddockTiles = new List<EnvironmentTile>();
 
@@ -69,6 +70,8 @@ public class Paddock : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
     {
+		handler = GameObject.Find("PaddockHandler").GetComponent<PaddockHandler>();
+
 		grassColours.Add(new Color32(98, 214, 164, 1));
 		grassColours.Add(new Color32(122, 221, 159, 1));
 		grassColours.Add(new Color32(105, 229, 140, 1));
@@ -197,6 +200,11 @@ public class Paddock : MonoBehaviour
 
 	public void emptyPaddock()
 	{
+		for(int i =0; i < dogsInPaddock.Count; i++)
+		{
+			Destroy(dogsInPaddock[i]);
+		}
+
 		dogsInPaddock.Clear();
 
 		for(int i=0; i < paddockTiles.Count; i++)
@@ -207,5 +215,7 @@ public class Paddock : MonoBehaviour
 		}
 
 		paddockTiles.Clear();
+		handler.deletePaddock(this.gameObject);
+		park.deletePaddock(this.gameObject);
 	}
 }
