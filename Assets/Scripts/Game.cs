@@ -795,6 +795,8 @@ public class Game : MonoBehaviour
 					vis.startTimer();
 					spawnedVisitors = true;
 				}
+
+				cam.transform.position = new Vector3(-105, 150, -325);
 			}
         }
     }
