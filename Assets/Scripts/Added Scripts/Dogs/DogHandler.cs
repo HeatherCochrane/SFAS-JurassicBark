@@ -17,7 +17,7 @@ public class DogHandler : MonoBehaviour
 
 	int selectedDog = 0;
 
-	List<GameObject> allDogs = new List<GameObject>();
+	public List<GameObject> allDogs = new List<GameObject>();
 
 	Challenges challenge;
 
@@ -59,5 +59,11 @@ public class DogHandler : MonoBehaviour
 	public List<GameObject> getDogList()
 	{
 		return allDogs;
+	}
+
+	public void removeDog(GameObject dog)
+	{
+		Debug.Log("called");
+		allDogs.Remove(dog);
 	}
 }

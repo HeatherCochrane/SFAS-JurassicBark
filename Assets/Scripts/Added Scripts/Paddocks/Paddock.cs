@@ -16,6 +16,7 @@ public class Paddock : MonoBehaviour
 	PaddockHandler handler;
 	PaddockStats stats;
 	Park park;
+	DogHandler dogs;
 
 	int hungerDrainRate = 0;
 
@@ -71,6 +72,7 @@ public class Paddock : MonoBehaviour
 	void Start()
     {
 		handler = GameObject.Find("PaddockHandler").GetComponent<PaddockHandler>();
+		dogs = GameObject.Find("DogHandler").GetComponent<DogHandler>();
 
 		grassColours.Add(new Color32(98, 214, 164, 1));
 		grassColours.Add(new Color32(122, 221, 159, 1));
@@ -202,6 +204,7 @@ public class Paddock : MonoBehaviour
 	{
 		for(int i =0; i < dogsInPaddock.Count; i++)
 		{
+			dogs.removeDog(dogsInPaddock[i].transform.parent.gameObject);
 			Destroy(dogsInPaddock[i]);
 		}
 

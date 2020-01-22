@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Challenges : MonoBehaviour
 {
 	Button showBoard;
+	PlayerCurrency currency;
 
 	public GameObject challengeBoard;
 
@@ -21,6 +22,9 @@ public class Challenges : MonoBehaviour
 		challengeBoard.SetActive(false);
 
 		showBoard = GameObject.Find("ChallengeButton").GetComponent<Button>();
+		currency = GameObject.Find("Currency").GetComponent<PlayerCurrency>();
+
+
 		showBoard.onClick.AddListener(delegate { if (challengeBoard.activeSelf) { challengeBoard.SetActive(false); } else { challengeBoard.SetActive(true); }; });
 
 		for(int i=0; i < 3; i++)
@@ -61,14 +65,17 @@ public class Challenges : MonoBehaviour
 		if(totalDogs > 4)
 		{
 			dogsChecks[0].SetActive(true);
+			currency.addIncome(50);
 		}
 		if(totalDogs > 9)
 		{
 			dogsChecks[1].SetActive(true);
+			currency.addIncome(100);
 		}
 		if(totalDogs > 29)
 		{
 			dogsChecks[2].SetActive(true);
+			currency.addIncome(500);
 		}
 
 	}
@@ -81,14 +88,17 @@ public class Challenges : MonoBehaviour
 		if(totalHooligansCaught > 2)
 		{
 			hooligansChecks[0].SetActive(true);
+			currency.addIncome(20);
 		}
 		if(totalHooligansCaught > 5)
 		{
 			hooligansChecks[1].SetActive(true);
+			currency.addIncome(50);
 		}
 		if(totalHooligansCaught > 9)
 		{
 			hooligansChecks[2].SetActive(true);
+			currency.addIncome(150);
 		}
 	}
 

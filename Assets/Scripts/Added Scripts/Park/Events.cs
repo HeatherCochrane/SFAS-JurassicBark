@@ -143,6 +143,7 @@ public class Events : MonoBehaviour
 		StartCoroutine(eventCountDown());
 	}
 
+
 	public void hooliganCaught(bool isCaught)
 	{
 		if (isCaught)

@@ -16,7 +16,6 @@ public class Game : MonoBehaviour
 	[SerializeField] private Environment environment;
 
     private RaycastHit[] mRaycastHits;
-    private Character mCharacter;
     private Environment mMap;
 
     private readonly int NumberOfRaycastHits = 2;
@@ -148,7 +147,6 @@ public class Game : MonoBehaviour
     {
         mRaycastHits = new RaycastHit[NumberOfRaycastHits];
         mMap = GetComponentInChildren<Environment>();
-      //  mCharacter = Instantiate(Character, transform);
 		Character.setCharacterType(1);
 
 		//Setting up gameobjects
@@ -282,18 +280,6 @@ public class Game : MonoBehaviour
 
 			if (!inMenu && !doingAction())
 			{
-				//Only move character when not currently doing something
-				//if (Input.GetMouseButtonDown(0))
-				//{
-				//	//If that tile exists, plan a route to walk on
-				//	if (tile != null)
-				//	{
-				//		List<EnvironmentTile> route = mMap.Solve(mCharacter.CurrentPosition, tile, Character.getCharacterType());
-				//		mCharacter.GoTo(route);
-				//	}
-
-				//}
-
 				if (Physics.Raycast(screenClick, out mRaycastHits[0]))
 				{
 					//If the raycast is hitting a dog, and not just placing one
@@ -352,6 +338,7 @@ public class Game : MonoBehaviour
 					{
 						if (Input.GetMouseButtonDown(0))
 						{
+							Debug.Log("Hooligan clicked");
 							events.releaseTheDogs();
 						}
 					}
@@ -767,8 +754,6 @@ public class Game : MonoBehaviour
 
             if( show )
             {
-               // mCharacter.transform.position = CharacterStart.position;
-               // mCharacter.transform.rotation = CharacterStart.rotation;
                 mMap.CleanUpWorld();
 
 				spawnedVisitors = false;
@@ -778,12 +763,6 @@ public class Game : MonoBehaviour
 			}
             else
             {
-               // mCharacter.transform.position = mMap.Start.Position;
-
-				//mCharacter.transform.rotation = Quaternion.identity;
-
-              //  mCharacter.CurrentPosition = mMap.Start;
-
 				inGame = true;
 				inMenu = false;
 
