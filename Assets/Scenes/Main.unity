@@ -2543,6 +2543,7 @@ MonoBehaviour:
   - {fileID: 8074577431499116814, guid: b9232ff22cf4c5a478fd6b5a7ae11ad0, type: 3}
   - {fileID: 8074404266343082793, guid: 51e615739f1f5f942878b2d21ca91bdc, type: 3}
   - {fileID: 568334502804609754, guid: f8734d24c27d1fc4b993815980ade113, type: 3}
+  allDogs: []
 --- !u!4 &504549087
 Transform:
   m_ObjectHideFlags: 0
@@ -4120,7 +4121,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 8, z: 8, w: -9}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -15506,7 +15507,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Buy Shop \xA310\n"
+  m_Text: "Buy Shop \xA330\n"
 --- !u!224 &1358918224143742494
 RectTransform:
   m_ObjectHideFlags: 0

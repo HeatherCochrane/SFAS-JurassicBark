@@ -84,7 +84,7 @@ public class Game : MonoBehaviour
 	PlayerCurrency currency;
 
 	//Item costs
-	int shopCost = 10;
+	int shopCost = 30;
 	int dogCost = 20;
 	int paddockCost = 10;
 	int pathCost = 5;
