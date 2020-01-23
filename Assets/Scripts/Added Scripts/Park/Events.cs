@@ -165,10 +165,15 @@ public class Events : MonoBehaviour
 
 		timer = 0;
 
-		if(hooligansSpawned < 2)
+		if(hooligansSpawned < 3)
 		{
 			startCountdown(Random.Range(20, 30));
 		}
+		else
+		{
+			hooligansSpawned = 0;
+		}
+
 	}
 
 	void returnDogs()

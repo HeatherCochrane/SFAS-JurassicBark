@@ -62,17 +62,17 @@ public class Challenges : MonoBehaviour
 	{
 		totalDogs += amount;
 
-		if(totalDogs > 4)
+		if(totalDogs > 4 && totalDogs < 10)
 		{
 			dogsChecks[0].SetActive(true);
 			currency.addIncome(50);
 		}
-		if(totalDogs > 9)
+		if(totalDogs > 9 && totalDogs < 30)
 		{
 			dogsChecks[1].SetActive(true);
 			currency.addIncome(100);
 		}
-		if(totalDogs > 29)
+		if(totalDogs == 30)
 		{
 			dogsChecks[2].SetActive(true);
 			currency.addIncome(500);
@@ -83,22 +83,41 @@ public class Challenges : MonoBehaviour
 	public void hooligansCaught(int caught)
 	{
 		totalHooligansCaught += caught;
-		Debug.Log("Caught: " + totalHooligansCaught);
 
-		if(totalHooligansCaught > 2)
+		if(totalHooligansCaught > 2 && totalHooligansCaught < 6)
 		{
 			hooligansChecks[0].SetActive(true);
 			currency.addIncome(20);
 		}
-		if(totalHooligansCaught > 5)
+		else if(totalHooligansCaught > 5 && totalHooligansCaught < 10)
 		{
 			hooligansChecks[1].SetActive(true);
 			currency.addIncome(50);
 		}
-		if(totalHooligansCaught > 9)
+		else if(totalHooligansCaught == 10)
 		{
 			hooligansChecks[2].SetActive(true);
 			currency.addIncome(150);
+		}
+	}
+
+	public void happinessReached(int happiness)
+	{
+		if(happiness > 70 && happiness < 79)
+		{
+
+		}
+		else if(happiness > 80 && happiness < 89)
+		{
+
+		}
+		else if(happiness > 90 && happiness < 99)
+		{
+
+		}
+		else if(happiness == 100)
+		{
+
 		}
 	}
 

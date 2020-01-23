@@ -12,6 +12,7 @@ public class Park : MonoBehaviour
 	}
 
 	ParkStats stats;
+	Challenges challenge;
 
 	List<GameObject> paddocksInPark = new List<GameObject>();
 	int averageHappiness = 0;
