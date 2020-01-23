@@ -143,6 +143,11 @@ public class Game : MonoBehaviour
 	GameObject deletionScreen;
 	GameObject deletingObject;
 
+
+	//Levelling
+	LevelExp level;
+	int standardExp = 50;
+
 	void Start()
     {
         mRaycastHits = new RaycastHit[NumberOfRaycastHits];
@@ -165,6 +170,7 @@ public class Game : MonoBehaviour
 		vis = GameObject.Find("VisitorHandler").GetComponent<VisitorHandler>();
 		decorations = GameObject.Find("Decoration").GetComponent<Decorations>();
 		events = GameObject.Find("Event").GetComponent<Events>();
+		level = GameObject.Find("Levelling").GetComponent<LevelExp>();
 
 		//Set up the paddock colour - darker green than the tiles
 		paddockColor = new Color32(60, 107, 62, 1);
@@ -179,7 +185,7 @@ public class Game : MonoBehaviour
 		tutorialScreen.SetActive(false);
 		deletionScreen.SetActive(false);
 
-			ShowMenu(true);
+		ShowMenu(true);
 	}
 
 	private void Update()
@@ -392,6 +398,8 @@ public class Game : MonoBehaviour
 					currency.takeIncome(shopCost);
 
 					shopClone.transform.parent = tile.transform;
+
+					level.addExp(standardExp);
 					
 				}
 			}
@@ -430,6 +438,7 @@ public class Game : MonoBehaviour
 					currency.takeIncome(decorationCost);
 
 					decoClone.transform.parent = tile.transform;
+					level.addExp(standardExp);
 
 				}
 			}
@@ -568,6 +577,7 @@ public class Game : MonoBehaviour
 		fence.transform.parent = paddockStandIn.transform;
 
 		paddockHandle.addPaddock(paddockStandIn);
+		level.addExp(standardExp);
 	}
 
 	void placePathways(EnvironmentTile tile)
@@ -625,6 +635,7 @@ public class Game : MonoBehaviour
 								placingDog = false;
 
 								currency.takeIncome(dogCost);
+								level.addExp(standardExp);
 							}
 						}
 					}
@@ -639,7 +650,6 @@ public class Game : MonoBehaviour
 		}
 
 	}
-
 
 	void placeFood(Paddock paddock)
 	{

@@ -63,7 +63,6 @@ public class DogHandler : MonoBehaviour
 
 	public void removeDog(GameObject dog)
 	{
-		Debug.Log("called");
 		allDogs.Remove(dog);
 	}
 }
