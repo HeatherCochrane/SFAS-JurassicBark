@@ -13,6 +13,8 @@ public class Challenges : MonoBehaviour
 	public List<GameObject> moneyChecks = new List<GameObject>();
 	public List<GameObject> dogsChecks = new List<GameObject>();
 	public List<GameObject> hooligansChecks = new List<GameObject>();
+	public List<GameObject> happinessChecks = new List<GameObject>();
+	public List<GameObject> levelChecks = new List<GameObject>();
 
 	int totalDogs = 0;
 	int totalHooligansCaught = 0;
@@ -32,6 +34,8 @@ public class Challenges : MonoBehaviour
 			moneyChecks[i].SetActive(false);
 			dogsChecks[i].SetActive(false);
 			hooligansChecks[i].SetActive(false);
+			happinessChecks[i].SetActive(false);
+			levelChecks[i].SetActive(false);
 		}
     }
 
@@ -62,17 +66,17 @@ public class Challenges : MonoBehaviour
 	{
 		totalDogs += amount;
 
-		if(totalDogs > 4 && totalDogs < 10)
+		if(totalDogs == 5)
 		{
 			dogsChecks[0].SetActive(true);
-			currency.addIncome(50);
+			currency.addIncome(20);
 		}
-		if(totalDogs > 9 && totalDogs < 30)
+		else if(totalDogs == 10)
 		{
 			dogsChecks[1].SetActive(true);
-			currency.addIncome(100);
+			currency.addIncome(50);
 		}
-		if(totalDogs == 30)
+		else if(totalDogs == 30)
 		{
 			dogsChecks[2].SetActive(true);
 			currency.addIncome(500);
@@ -84,12 +88,12 @@ public class Challenges : MonoBehaviour
 	{
 		totalHooligansCaught += caught;
 
-		if(totalHooligansCaught > 2 && totalHooligansCaught < 6)
+		if(totalHooligansCaught == 3)
 		{
 			hooligansChecks[0].SetActive(true);
 			currency.addIncome(20);
 		}
-		else if(totalHooligansCaught > 5 && totalHooligansCaught < 10)
+		else if(totalHooligansCaught == 6)
 		{
 			hooligansChecks[1].SetActive(true);
 			currency.addIncome(50);
@@ -103,21 +107,39 @@ public class Challenges : MonoBehaviour
 
 	public void happinessReached(int happiness)
 	{
-		if(happiness > 70 && happiness < 79)
+		if(happiness > 70 && happiness < 89)
 		{
-
-		}
-		else if(happiness > 80 && happiness < 89)
-		{
-
+			happinessChecks[0].SetActive(true);
+			currency.addIncome(50);
 		}
 		else if(happiness > 90 && happiness < 99)
 		{
-
+			happinessChecks[1].SetActive(true);
+			currency.addIncome(150);
 		}
 		else if(happiness == 100)
 		{
+			happinessChecks[2].SetActive(true);
+			currency.addIncome(250);
+		}
+	}
 
+	public void levelsReached(int level)
+	{
+		if (level == 2)
+		{
+			levelChecks[0].SetActive(true);
+			currency.addIncome(20);
+		}
+		else if (level == 4)
+		{
+			levelChecks[1].SetActive(true);
+			currency.addIncome(50);
+		}
+		else if(level == 6)
+		{
+			levelChecks[0].SetActive(true);
+			currency.addIncome(100);
 		}
 	}
 

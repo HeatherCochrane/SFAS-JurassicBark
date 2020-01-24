@@ -14,6 +14,7 @@ public class LevelExp : MonoBehaviour
 	Text parkLevelText;
 	Slider progressBar;
 	HUD buttons;
+	Challenges challenge;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +22,7 @@ public class LevelExp : MonoBehaviour
 		parkLevelText = GameObject.Find("ParkLevel").GetComponent<Text>();
 		progressBar = parkLevelText.gameObject.transform.GetChild(0).GetComponent<Slider>();
 		buttons = GameObject.Find("HUD").GetComponent<HUD>();
+		challenge = GameObject.Find("Challenges").GetComponent<Challenges>();
 		Invoke("adjustParkLevel", 9);
 		progressBar.maxValue = xpGain;
     }
@@ -52,6 +54,7 @@ public class LevelExp : MonoBehaviour
 		parkLevel++;
 		parkLevelText.text = "Park Level: " + parkLevel.ToString();
 		buttons.unlockButtons(parkLevel);
+		challenge.levelsReached(parkLevel);
 	}
 
 	int getParkLevel()

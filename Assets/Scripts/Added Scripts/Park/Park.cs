@@ -33,6 +33,8 @@ public class Park : MonoBehaviour
 		averageHappiness = 50;
 		stats.happiness = averageHappiness;
 		parkHappiness.text = "Park Happiness: " + averageHappiness.ToString();
+
+		challenge = GameObject.Find("Challenges").GetComponent<Challenges>();
     }
 
     // Update is called once per frame
@@ -67,6 +69,7 @@ public class Park : MonoBehaviour
 			}
 		}
 
+		challenge.happinessReached(averageHappiness);
 		return averageHappiness;
 	}
 

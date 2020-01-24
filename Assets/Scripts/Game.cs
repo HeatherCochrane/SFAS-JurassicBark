@@ -555,6 +555,7 @@ public class Game : MonoBehaviour
 			list[i].GetComponent<Renderer>().materials[1].color = grassColours[ran];
 
 			list[i].transform.parent = paddockStandIn.transform;
+			list[i].isPaddock = true;
 		}
 
 		//Place fence around the paddock at the centre position
@@ -577,7 +578,7 @@ public class Game : MonoBehaviour
 		fence.transform.parent = paddockStandIn.transform;
 
 		paddockHandle.addPaddock(paddockStandIn);
-		level.addExp(standardExp);
+		level.addExp(100);
 	}
 
 	void placePathways(EnvironmentTile tile)

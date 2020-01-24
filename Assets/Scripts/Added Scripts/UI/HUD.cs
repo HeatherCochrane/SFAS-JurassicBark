@@ -84,8 +84,8 @@ public class HUD : MonoBehaviour
 	public void unlockButtons(int level)
 	{
 		//Take one off of level to make it work for lists
-
 		level -= 1;
+
 		if (unlockables1[level] != null)
 		{
 			unlockables1[level].interactable = true;
