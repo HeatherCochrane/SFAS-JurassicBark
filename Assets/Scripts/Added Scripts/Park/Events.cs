@@ -71,6 +71,7 @@ public class Events : MonoBehaviour
 
 	Challenges challenge;
 	Game game;
+	LevelExp level;
     void Start()
     {
 		map = GameObject.Find("Environment").GetComponent<Environment>();
@@ -79,6 +80,7 @@ public class Events : MonoBehaviour
 		hud = GameObject.Find("HUD").GetComponent<HUD>();
 		challenge = GameObject.Find("Challenges").GetComponent<Challenges>();
 		game = GameObject.Find("Game").GetComponent<Game>();
+		level = GameObject.Find("Levelling").GetComponent<LevelExp>();
 
 		hud.showHoundsButton(false);
 	}
@@ -150,6 +152,7 @@ public class Events : MonoBehaviour
 		{
 			challenge.hooligansCaught(1);
 			currency.addIncome(20);
+			level.addExp(50);
 		}
 		else
 		{
