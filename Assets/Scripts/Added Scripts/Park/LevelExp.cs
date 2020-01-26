@@ -42,7 +42,7 @@ public class LevelExp : MonoBehaviour
 
 	void checkExp()
 	{
-		if(currentExp == xpGain)
+		if(currentExp >= xpGain)
 		{
 			adjustParkLevel();
 			xpGain += 500;

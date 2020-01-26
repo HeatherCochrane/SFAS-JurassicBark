@@ -40,6 +40,8 @@ public class Challenges : MonoBehaviour
 			hooligansChecks[i].SetActive(false);
 			levelChecks[i].SetActive(false);
 		}
+
+		happinessCheck.SetActive(false);
     }
 
     // Update is called once per frame
@@ -76,7 +78,6 @@ public class Challenges : MonoBehaviour
 	public void hooligansCaught(int caught)
 	{
 		totalHooligansCaught += caught;
-
 		if(totalHooligansCaught == 3)
 		{
 			hooligansChecks[0].SetActive(true);

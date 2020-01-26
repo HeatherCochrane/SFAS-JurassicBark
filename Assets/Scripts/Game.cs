@@ -137,6 +137,7 @@ public class Game : MonoBehaviour
 	public GameObject HUDObj;
 	//Public
 	Events events;
+	bool eventActive = false;
 
 
 	//Deleting paddocks
@@ -250,38 +251,7 @@ public class Game : MonoBehaviour
 			//For stopping current action
 			if (Input.GetMouseButtonDown(1))
 			{
-				//Clear up any objects and variables within the scene
-				placingDog = false;
-				placingPaths = false;
-				removingDebris = false;
-				placingShops = false;
-				placingFood = false;
-				placingDeco = false;
-
-				//Stand in
-				profile.transform.localPosition = new Vector3(0, 300, 0);
-				paddockProfile.transform.localPosition = new Vector3(0, 300, 0);
-
-				//Sprite
-				actionSprite.SetActive(false);
-
-				if (spawnedDog != null)
-				{
-					Destroy(spawnedDog);
-				}
-
-				if(spawnedDeco != null)
-				{
-					Destroy(spawnedDeco);
-				}
-
-				if (placingPaddock)
-				{
-					Destroy(paddockStandIn);
-					placingPaddock = false;
-				}
-
-				Destroy(burgerStandIn);
+				cancelAllActions();
 			}
 
 			if (!inMenu && !doingAction())
@@ -346,6 +316,7 @@ public class Game : MonoBehaviour
 						{
 							Debug.Log("Hooligan clicked");
 							events.releaseTheDogs();
+							eventActive = true;
 						}
 					}
 				}
@@ -353,6 +324,42 @@ public class Game : MonoBehaviour
 		}
 	}
 
+
+	public void cancelAllActions()
+	{
+		//Clear up any objects and variables within the scene
+		placingDog = false;
+		placingPaths = false;
+		removingDebris = false;
+		placingShops = false;
+		placingFood = false;
+		placingDeco = false;
+
+		//Stand in
+		profile.transform.localPosition = new Vector3(0, 300, 0);
+		paddockProfile.transform.localPosition = new Vector3(0, 300, 0);
+
+		//Sprite
+		actionSprite.SetActive(false);
+
+		if (spawnedDog != null)
+		{
+			Destroy(spawnedDog);
+		}
+
+		if (spawnedDeco != null)
+		{
+			Destroy(spawnedDeco);
+		}
+
+		if (placingPaddock)
+		{
+			Destroy(paddockStandIn);
+			placingPaddock = false;
+		}
+
+		Destroy(burgerStandIn);
+	}
 
 	void showDogProfile()
 	{
@@ -563,7 +570,7 @@ public class Game : MonoBehaviour
 		//Positions for each fence are different 
 		switch(getPaddockSize())
 		{
-			case 3: fence.transform.localPosition = new Vector3(paddockStandIn.transform.localPosition.x + 5, paddockStandIn.transform.localPosition.y + 14.5f, paddockStandIn.transform.localPosition.z + 15);
+			case 3: fence.transform.localPosition = new Vector3(paddockStandIn.transform.localPosition.x + 7, paddockStandIn.transform.localPosition.y + 14.5f, paddockStandIn.transform.localPosition.z + 15);
 				break;
 			case 4: fence.transform.localPosition = new Vector3(paddockStandIn.transform.localPosition.x + 25, paddockStandIn.transform.localPosition.y + -29, paddockStandIn.transform.localPosition.z + 48);
 				break;
@@ -731,7 +738,7 @@ public class Game : MonoBehaviour
 	//Function to return true if the player is currently doing any action
 	bool doingAction()
 	{
-		if(placingPaddock || removingDebris || placingDog || placingPaths || placingShops || placingDeco)
+		if(placingPaddock || removingDebris || placingDog || placingPaths || placingShops || placingDeco || eventActive)
 		{
 			return true;
 		}
@@ -885,6 +892,11 @@ public class Game : MonoBehaviour
 	public void setInMenu(bool set)
 	{
 		inMenu = set;
+	}
+
+	public void setEventActive(bool set)
+	{
+		eventActive = set;
 	}
 
 	public void gamePaused(bool set)

@@ -150,13 +150,14 @@ public class Events : MonoBehaviour
 	{
 		if (isCaught)
 		{
+			Debug.Log("CALLED");
 			challenge.hooligansCaught(1);
-			currency.addIncome(20);
+			currency.addIncome(10);
 			level.addExp(50);
 		}
 		else
 		{
-			currency.takeIncome(10);
+			currency.takeIncome(50);
 		}
 
 		hooligansSpawned++;
@@ -165,10 +166,11 @@ public class Events : MonoBehaviour
 		hooliganActive = false;
 		hud.showHoundsButton(false);
 		eventActive = false;
+		game.setEventActive(false);
 
 		timer = 0;
 
-		if(hooligansSpawned < 3)
+		if(hooligansSpawned < 2)
 		{
 			startCountdown(Random.Range(20, 30));
 		}

@@ -745,12 +745,12 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: 
+      - m_Target: {fileID: 896303071}
+        m_MethodName: cancelAllActions
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -15026,7 +15026,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: cd6d7944516eccb409bc60ee5c6dfad6, type: 2}
+      objectReference: {fileID: 2100000, guid: 4de80ddc706c2a4468818b670307a985, type: 2}
     - target: {fileID: 8127668089735589089, guid: 28c54b26391302f40b7a5193cf8bfe96,
         type: 3}
       propertyPath: m_LocalPosition.x
