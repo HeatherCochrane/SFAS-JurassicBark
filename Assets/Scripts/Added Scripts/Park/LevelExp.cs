@@ -35,6 +35,7 @@ public class LevelExp : MonoBehaviour
 
 	public void addExp(int added)
 	{
+		Debug.Log("Exp added: " + added);
 		currentExp += added;
 		progressBar.value += added;
 		checkExp();

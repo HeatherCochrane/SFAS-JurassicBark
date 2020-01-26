@@ -105,9 +105,11 @@ public class Events : MonoBehaviour
 	public void setTile()
 	{
 		tiles = map.getMap();
-		
-		//If the tile isn't accessible chose another
-		while (chosenTile.isPaddock || !chosenTile.IsAccessible)
+		pickTile();
+		chosenTile = tiles[ranX][ranY];
+
+		//If the tile isn't accessible choose another
+		while (!chosenTile.IsAccessible)
 		{
 			pickTile();
 			chosenTile = tiles[ranX][ranY];
@@ -126,6 +128,7 @@ public class Events : MonoBehaviour
 		eventActive = true;
 		timer = 0;
 		hooliganActive = true;
+		game.setEventActive(true);
 		StartCoroutine(eventTimer());
 	}
 

@@ -86,11 +86,11 @@ public class HUD : MonoBehaviour
 		//Take one off of level to make it work for lists
 		level -= 1;
 
-		if (unlockables1[level] != null)
+		if (level < unlockables1.Count)
 		{
 			unlockables1[level].interactable = true;
 		}
-		if (unlockables2[level] != null)
+		if (level < unlockables2.Count)
 		{
 			unlockables2[level].interactable = true;
 		}

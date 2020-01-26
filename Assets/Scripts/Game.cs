@@ -236,7 +236,38 @@ public class Game : MonoBehaviour
 			//For stopping current action
 			if (Input.GetMouseButtonDown(1))
 			{
-				cancelAllActions();
+				//Clear up any objects and variables within the scene
+				placingDog = false;
+				placingPaths = false;
+				removingDebris = false;
+				placingShops = false;
+				placingFood = false;
+				placingDeco = false;
+
+				//Stand in
+				profile.transform.localPosition = new Vector3(0, 300, 0);
+				paddockProfile.transform.localPosition = new Vector3(0, 300, 0);
+
+				//Sprite
+				actionSprite.SetActive(false);
+
+				if (spawnedDog != null)
+				{
+					Destroy(spawnedDog);
+				}
+
+				if (spawnedDeco != null)
+				{
+					Destroy(spawnedDeco);
+				}
+
+				if (placingPaddock)
+				{
+					Destroy(paddockStandIn);
+					placingPaddock = false;
+				}
+
+				Destroy(burgerStandIn);
 			}
 
 			if (!inMenu && !doingAction())
@@ -295,54 +326,17 @@ public class Game : MonoBehaviour
 					}
 
 
-					if (mRaycastHits[0].transform.name == "Hooligan(Clone)" && !doingAction())
+					if (mRaycastHits[0].transform.name == "Hooligan(Clone)" && eventActive)
 					{
 						if (Input.GetMouseButtonDown(0))
 						{
 							events.releaseTheDogs();
-							eventActive = true;
+							eventActive = false;
 						}
 					}
 				}
 			}
 		}
-	}
-
-
-	public void cancelAllActions()
-	{
-		//Clear up any objects and variables within the scene
-		placingDog = false;
-		placingPaths = false;
-		removingDebris = false;
-		placingShops = false;
-		placingFood = false;
-		placingDeco = false;
-
-		//Stand in
-		profile.transform.localPosition = new Vector3(0, 300, 0);
-		paddockProfile.transform.localPosition = new Vector3(0, 300, 0);
-
-		//Sprite
-		actionSprite.SetActive(false);
-
-		if (spawnedDog != null)
-		{
-			Destroy(spawnedDog);
-		}
-
-		if (spawnedDeco != null)
-		{
-			Destroy(spawnedDeco);
-		}
-
-		if (placingPaddock)
-		{
-			Destroy(paddockStandIn);
-			placingPaddock = false;
-		}
-
-		Destroy(burgerStandIn);
 	}
 
 	void showDogProfile()
@@ -654,7 +648,6 @@ public class Game : MonoBehaviour
 		{
 			Ray screenClick = MainCamera.ScreenPointToRay(Input.mousePosition);
 
-
 			if (tile != null)
 			{
 				if (!tile.IsAccessible && !tile.isPaddock)
@@ -722,7 +715,7 @@ public class Game : MonoBehaviour
 	//Function to return true if the player is currently doing any action
 	bool doingAction()
 	{
-		if(placingPaddock || removingDebris || placingDog || placingPaths || placingShops || placingDeco || eventActive)
+		if(placingPaddock || removingDebris || placingDog || placingPaths || placingShops || placingDeco)
 		{
 			return true;
 		}
@@ -923,7 +916,7 @@ public class Game : MonoBehaviour
 		if(deletePaddock)
 		{
 			List<EnvironmentTile> tiles = deletingObject.GetComponentInParent<Paddock>().getPaddockTiles();
-
+			Debug.Log(tiles.Count);
 			for (int i = 0; i < tiles.Count; i++)
 			{
 				tiles[i].isPaddock = false;
