@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-
+//Paddock stats
 struct PaddockStats
 {
 	public int numOfDogs;
@@ -13,15 +13,16 @@ struct PaddockStats
 
 public class Paddock : MonoBehaviour
 {
+	//Needed scripts
 	PaddockHandler handler;
 	PaddockStats stats;
 	Park park;
 	DogHandler dogs;
 
+	//Based on the number of dogs within the paddock
 	int hungerDrainRate = 0;
 
 	public List<GameObject> dogsInPaddock = new List<GameObject>();
-
 	List<EnvironmentTile> paddockTiles = new List<EnvironmentTile>();
 
 	//Reduce Food 
@@ -62,7 +63,6 @@ public class Paddock : MonoBehaviour
 
 
 	int averageHappiness = 0;
-
 	int numOfDogsAvaliable = 0;
 	int dogCount = 0;
 
@@ -88,6 +88,8 @@ public class Paddock : MonoBehaviour
 	void paddockSpawned()
 	{
 		park = GameObject.Find("ParkHandler").GetComponent<Park>();
+
+		//Update the paddocks in the park
 		park.addPaddock(this.gameObject);
 
 
@@ -100,6 +102,7 @@ public class Paddock : MonoBehaviour
 
 	public bool addDogs()
 	{
+		//Only add in a dog if the max has not been reached
 		if(dogCount != numOfDogsAvaliable)
 		{
 			dogCount += 1;
@@ -117,8 +120,10 @@ public class Paddock : MonoBehaviour
 
 	public void updateHappiness()
 	{
+		//Upate the paddocks happiness based on the dogs within the paddocks happiness
 		if (dogsInPaddock.Count > 0)
 		{
+			//Reset the happiness to avoid error with the total
 			averageHappiness = 0;
 
 			for (int i= 0; i < dogsInPaddock.Count; i++)
@@ -129,7 +134,10 @@ public class Paddock : MonoBehaviour
 			averageHappiness = averageHappiness / dogsInPaddock.Count;
 
 		}
+		//Clamp the values
+		Mathf.Clamp(averageHappiness, 0, 100);
 
+		//Update UI
 		stats.happinessLevels = averageHappiness;
 
 
@@ -146,6 +154,7 @@ public class Paddock : MonoBehaviour
 	{
 		return dogsInPaddock.Count;
 	}
+
 	public void addFood(int food)
 	{
 		stats.foodLevels += food;
@@ -202,6 +211,7 @@ public class Paddock : MonoBehaviour
 
 	public void emptyPaddock()
 	{
+		//Completley clear the paddock and all its contents to prevent errors
 		for(int i =0; i < dogsInPaddock.Count; i++)
 		{
 			dogs.removeDog(dogsInPaddock[i].transform.parent.gameObject);

@@ -73,7 +73,6 @@ public class CameraScript : MonoBehaviour
 
 			mainCam.fieldOfView += Input.mouseScrollDelta.y * -0.5f;
 
-			//Still a bit iffy but works
 			mainCam.fieldOfView = Mathf.Clamp(mainCam.fieldOfView, camFOVmin, camFOVmax);
 			mainCam.transform.position = new Vector3(Mathf.Clamp(mainCam.transform.position.x, minx, maxx), Mathf.Clamp(mainCam.transform.position.y, miny, maxy), Mathf.Clamp(mainCam.transform.position.z, minz, maxz));
 		}

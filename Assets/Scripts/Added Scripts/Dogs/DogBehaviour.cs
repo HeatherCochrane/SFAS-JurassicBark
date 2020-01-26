@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
+//Dogs stats
 struct Stats
 {
 	public string name;
@@ -12,21 +12,24 @@ struct Stats
 
 public class DogBehaviour : Character
 {
-
 	Stats stats;
 	List<string> names = new List<string>();
 
+	//Random int for picking the dogs name
 	int rand = 0;
 
+	//The dogs paddock it has been assigned to
 	Paddock paddock;
 	PaddockProfiles Pprofiles;
 
+	//Sets the max values for both happiness and hunger
 	int max = 100;
 	int min = 0;
 
 
 	//Movement
 	DogHandler handler;
+
 	//Environment object
 	Environment mMap;
 
@@ -38,8 +41,10 @@ public class DogBehaviour : Character
 
 	EnvironmentTile randTile;
 
+	//Tiles avaliable for the specified dog
 	public List<EnvironmentTile> paddockTiles = new List<EnvironmentTile>();
 
+	//Tile the dog was placed on
 	EnvironmentTile placedTile;
 
 	bool invokeStarted = false;
@@ -61,8 +66,10 @@ public class DogBehaviour : Character
 		names.Add("Flynn");
 		names.Add("Bobbi");
 
+		//Dog must be set up before moving
 		setUpDog();
 
+		//Move the dog as soon as it has been placed
 		pickRandomTile();
 		moveDog();
 	}
@@ -70,6 +77,7 @@ public class DogBehaviour : Character
     // Update is called once per frame
     void Update()
     {
+		//Allow the dogs to chase the hooligan without stopping and returning to their paddock
 		if(this.returnGoToState() == true && invokeStarted == false)
 		{
 			moveDog();
@@ -80,6 +88,7 @@ public class DogBehaviour : Character
 
 	void setUpDog()
 	{
+		//Tell paddock another dog has been added
 		paddock.updateDogList(this.gameObject);
 
 		rand = Random.Range(0, names.Count);
@@ -87,12 +96,15 @@ public class DogBehaviour : Character
 		//Will randomly pick name
 		stats.name = names[rand];
 
+		//Starting Happiness
 		stats.happiness = 60;
 
 		this.gameObject.name = stats.name;
 
+		//Set this 'character' to be of type dog
 		this.setCharacterType(3);
 
+		//Set the paddock as its parent object
 		this.gameObject.transform.parent.transform.parent = paddock.gameObject.transform;
 
 		paddock.updateHappiness();
@@ -100,6 +112,7 @@ public class DogBehaviour : Character
 
 	void checkForDogs()
 	{
+		//Clamp the dogs happiness based on how many friends are in the paddock
 		if(paddock.getDogs() == 1)
 		{
 			stats.happiness = Mathf.Clamp(stats.happiness, 0, 70);
@@ -170,6 +183,7 @@ public class DogBehaviour : Character
 		//Once the character has moved, call the function after a certain amount of time for continuos movement
 		randTime = Random.Range(8, 12);
 
+		//Constantly move the dog around the paddock
 		Invoke("moveDog", randTime);
 
 	}

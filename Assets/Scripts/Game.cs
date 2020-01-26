@@ -27,26 +27,22 @@ public class Game : MonoBehaviour
 	//Paddock Placement - player interactions
 	private bool placingPaddock = false;
 
-	//Paddock
-
+	//Paddock//
 	//Prefabs
 	GameObject paddockStandIn;
-
-	//Lists
 	public List<GameObject> paddockChildren = new List<GameObject>();
 	public List<EnvironmentTile> placeablePaddock = new List<EnvironmentTile>();
-
-	//Tile Colour
 	Color32 paddockColor;
-
 	//Bool for when placing down a paddock
 	bool canPlacePaddock = false;
-
-	//Size of Paddock
 	int paddockSize = 0;
-
-	//For spawning fences
 	GameObject fence;
+	//Deleting paddocks
+	GameObject deletionScreen;
+	GameObject deletingObject;
+	//Paddock  Profile
+	GameObject paddockProfile;
+	PaddockProfiles PProfiles;
 
 	//Dog 
 	DogHandler dog;
@@ -60,7 +56,6 @@ public class Game : MonoBehaviour
 
 	//Tiles
 	EnvironmentTile tile;
-
 
 	//Debris Remover
 	bool removingDebris = false;
@@ -82,7 +77,6 @@ public class Game : MonoBehaviour
 
 	//Currency
 	PlayerCurrency currency;
-
 	//Item costs
 	int shopCost = 30;
 	int dogCost = 20;
@@ -94,10 +88,6 @@ public class Game : MonoBehaviour
 	//Dog Profile
 	GameObject profile;
 	DogProfile profiles;
-
-	//Paddock  Profile
-	GameObject paddockProfile;
-	PaddockProfiles PProfiles;
 
 	//Food
 	bool placingFood = false;
@@ -127,6 +117,7 @@ public class Game : MonoBehaviour
 	GameObject decoClone;
 	int decoSelected = 0;
 
+	//Outside the park area
 	public GameObject bounderyArea;
 
 	//Pause
@@ -138,12 +129,6 @@ public class Game : MonoBehaviour
 	//Public
 	Events events;
 	bool eventActive = false;
-
-
-	//Deleting paddocks
-	GameObject deletionScreen;
-	GameObject deletingObject;
-
 
 	//Levelling
 	LevelExp level;
@@ -314,7 +299,6 @@ public class Game : MonoBehaviour
 					{
 						if (Input.GetMouseButtonDown(0))
 						{
-							Debug.Log("Hooligan clicked");
 							events.releaseTheDogs();
 							eventActive = true;
 						}

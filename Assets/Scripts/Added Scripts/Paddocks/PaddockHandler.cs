@@ -9,7 +9,6 @@ public class PaddockHandler : MonoBehaviour
 
 
 	//Paddock prefabs
-
 	public GameObject smallPrefab;
 	GameObject[] newPaddock;
 	public GameObject paddockParentPrefab;
@@ -39,9 +38,11 @@ public class PaddockHandler : MonoBehaviour
 
 	public GameObject createPaddock(Vector3 location, int size)
 	{
+		//Create a new paddock parent
 		paddockParent = Instantiate(paddockParentPrefab);
 		paddockParent.transform.position = location;
 
+		//Create the outline of the paddock chosen
 		for (int j = 0; j < size; j++)
 		{
 			for (int i = 0; i < size; i++)

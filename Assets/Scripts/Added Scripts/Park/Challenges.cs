@@ -10,6 +10,7 @@ public class Challenges : MonoBehaviour
 
 	public GameObject challengeBoard;
 
+	//Lists of checks on screen
 	public List<GameObject> dogsChecks = new List<GameObject>();
 	public List<GameObject> hooligansChecks = new List<GameObject>();
 	public List<GameObject> levelChecks = new List<GameObject>();
@@ -18,6 +19,7 @@ public class Challenges : MonoBehaviour
 	int totalDogs = 0;
 	int totalHooligansCaught = 0;
 
+	//Keep track of the challenges completed
 	int totalChallengesFinished = 0;
 
 	public Image endScreen;
@@ -34,6 +36,7 @@ public class Challenges : MonoBehaviour
 
 		showBoard.onClick.AddListener(delegate { if (challengeBoard.activeSelf) { challengeBoard.SetActive(false); } else { challengeBoard.SetActive(true); }; });
 
+		//Dont show the ticks on load
 		for(int i=0; i < 3; i++)
 		{
 			dogsChecks[i].SetActive(false);

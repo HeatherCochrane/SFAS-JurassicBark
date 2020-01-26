@@ -7,11 +7,11 @@ public class DogHandler : MonoBehaviour
 {
 	Environment mMap;
 
-	//Dog Prefab
+	//Dog Prefabs
 	GameObject dog;
 	GameObject staticDog;
 
-
+	//Lists holding the animated dog models and the static models
 	public List<GameObject> dogBreeds = new List<GameObject>();
 	public List<GameObject> dogsStatic = new List<GameObject>();
 
@@ -38,6 +38,7 @@ public class DogHandler : MonoBehaviour
 		dog = Instantiate(dogBreeds[selectedDog]);
 		dog.transform.rotation = Quaternion.identity;
 
+		//Update dogs owned for both park and challenge
 		allDogs.Add(dog);
 		challenge.dogsBought(1);
 

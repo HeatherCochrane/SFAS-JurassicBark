@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class PaddockProfiles : MonoBehaviour
 {
+	//Get the UI elements
 	Text hunger;
 	Text happiness;
 	Paddock profiles;

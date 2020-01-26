@@ -45,6 +45,7 @@ public class Park : MonoBehaviour
 
 	public int generateHappinessAverage()
 	{
+		//Only generate the happines using paddocks with at least one dog within them
 		if (paddocksInPark.Count > 0)
 		{
 			checkPaddocks();
@@ -108,13 +109,14 @@ public class Park : MonoBehaviour
 
 	public void setEntryFee()
 	{
+		//Set entry fee, don;t set as 0 to allow player to always have income coming in
 		if(averageHappiness < 10)
 		{
-			parkEntryFee = 0;
+			parkEntryFee = 1;
 		}
 		else if(averageHappiness < 40)
 		{
-			parkEntryFee = 1;
+			parkEntryFee = 2;
 		}
 		else if(averageHappiness < 60)
 		{

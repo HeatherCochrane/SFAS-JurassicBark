@@ -72,6 +72,7 @@ public class ConcessionStand : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		//Ensure the shop icon above the shop is always pointed at the camera
 		if (shopPlaced)
 		{
 			incomeSprite.transform.LookAt(cam.transform.position, Vector3.up);
@@ -87,7 +88,6 @@ public class ConcessionStand : MonoBehaviour
 	{
 		tilePlaced = tile;
 		checkTiles();
-
 		StartCoroutine(produceIncome());
 	}
 

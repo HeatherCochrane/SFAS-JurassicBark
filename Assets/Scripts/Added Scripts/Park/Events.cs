@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Events : MonoBehaviour
 {
-
+	//Timer for when the hooligan is active
 	IEnumerator eventTimer()
 	{
 		while (eventActive)
@@ -27,6 +27,7 @@ public class Events : MonoBehaviour
 		}
 	}
 
+	//Timer countdown for when the hooligan should spawn
 	IEnumerator eventCountDown()
 	{
 		while(countDown != 0)
@@ -72,6 +73,8 @@ public class Events : MonoBehaviour
 	Challenges challenge;
 	Game game;
 	LevelExp level;
+
+
     void Start()
     {
 		map = GameObject.Find("Environment").GetComponent<Environment>();
@@ -102,11 +105,9 @@ public class Events : MonoBehaviour
 	public void setTile()
 	{
 		tiles = map.getMap();
-		pickTile();
-
-		chosenTile = tiles[ranX][ranY];
-
-		while (!chosenTile.IsAccessible)
+		
+		//If the tile isn't accessible chose another
+		while (chosenTile.isPaddock || !chosenTile.IsAccessible)
 		{
 			pickTile();
 			chosenTile = tiles[ranX][ranY];
@@ -118,6 +119,7 @@ public class Events : MonoBehaviour
 		ranX = Random.Range(0, map.getMapSize().x);
 		ranY = Random.Range(0, map.getMapSize().y);
 	}
+
 	public void startEvent()
 	{
 		spawnHooligan();
@@ -150,7 +152,6 @@ public class Events : MonoBehaviour
 	{
 		if (isCaught)
 		{
-			Debug.Log("CALLED");
 			challenge.hooligansCaught(1);
 			currency.addIncome(10);
 			level.addExp(50);
@@ -183,6 +184,7 @@ public class Events : MonoBehaviour
 
 	void returnDogs()
 	{
+		//Send the dogs back to their paddocks
 		if (dogsInPark.Count > 0 && dogs != null)
 		{
 			for (int i = 0; i < dogsInPark.Count; i++)

@@ -20,6 +20,7 @@ public class Decorations : MonoBehaviour
 
 	public GameObject pickDecoration(int num)
 	{
+		//Return the decoration picked
 		deco = Instantiate(decorations[num]);
 		return deco;
 	}
