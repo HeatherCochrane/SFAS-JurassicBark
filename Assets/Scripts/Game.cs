@@ -377,7 +377,6 @@ public class Game : MonoBehaviour
 		if(Input.GetMouseButtonDown(2) || Input.GetKeyDown(KeyCode.Space))
 		{
 			burgerStandIn.transform.Rotate(Vector3.up, 90.0f);
-
 		}
 		else if(Input.GetMouseButtonDown(0) && !tile.isPaddock && !tile.isPath)
 		{
@@ -590,7 +589,6 @@ public class Game : MonoBehaviour
 			{
 				tile.GetComponent<Renderer>().materials[1].color = new Color32(196, 136, 75, 1);
 				tile.isPath = true;
-				tile.IsAccessible = false;
 				vis.addPath(tile);
 
 				currency.takeIncome(pathCost);
@@ -599,6 +597,8 @@ public class Game : MonoBehaviour
 				{
 					shops[i].GetComponent<ConcessionStand>().checkTiles();
 				}
+
+				level.addExp(10);
 			}
 		}
 	}

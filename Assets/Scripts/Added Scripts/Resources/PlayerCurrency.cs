@@ -43,7 +43,6 @@ public class PlayerCurrency : MonoBehaviour
 	public void addIncome(int income)
 	{
 		totalIncome += income;
-		challenges.moneyEarned(totalIncome);
 		updateUI();
 		moneyAdded();
 	}

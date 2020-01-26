@@ -10,14 +10,18 @@ public class Challenges : MonoBehaviour
 
 	public GameObject challengeBoard;
 
-	public List<GameObject> moneyChecks = new List<GameObject>();
 	public List<GameObject> dogsChecks = new List<GameObject>();
 	public List<GameObject> hooligansChecks = new List<GameObject>();
-	public List<GameObject> happinessChecks = new List<GameObject>();
 	public List<GameObject> levelChecks = new List<GameObject>();
+	public GameObject happinessCheck;
 
 	int totalDogs = 0;
 	int totalHooligansCaught = 0;
+
+	int totalChallengesFinished = 0;
+
+	public Image endScreen;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,15 +30,14 @@ public class Challenges : MonoBehaviour
 		showBoard = GameObject.Find("ChallengeButton").GetComponent<Button>();
 		currency = GameObject.Find("Currency").GetComponent<PlayerCurrency>();
 
+		endScreen.gameObject.SetActive(false);
 
 		showBoard.onClick.AddListener(delegate { if (challengeBoard.activeSelf) { challengeBoard.SetActive(false); } else { challengeBoard.SetActive(true); }; });
 
 		for(int i=0; i < 3; i++)
 		{
-			moneyChecks[i].SetActive(false);
 			dogsChecks[i].SetActive(false);
 			hooligansChecks[i].SetActive(false);
-			happinessChecks[i].SetActive(false);
 			levelChecks[i].SetActive(false);
 		}
     }
@@ -45,23 +48,6 @@ public class Challenges : MonoBehaviour
         
     }
 
-	public void moneyEarned(int amount)
-	{
-		if (amount > 299)
-		{
-			moneyChecks[0].SetActive(true);
-		}
-		if (amount > 699)
-		{
-			moneyChecks[1].SetActive(true);
-		}
-		if (amount > 999)
-		{
-			moneyChecks[2].SetActive(true);
-		}
-
-	}
-
 	public void dogsBought(int amount)
 	{
 		totalDogs += amount;
@@ -70,16 +56,19 @@ public class Challenges : MonoBehaviour
 		{
 			dogsChecks[0].SetActive(true);
 			currency.addIncome(20);
+			totalChallengesFinished++;
 		}
 		else if(totalDogs == 10)
 		{
 			dogsChecks[1].SetActive(true);
 			currency.addIncome(50);
+			totalChallengesFinished++;
 		}
 		else if(totalDogs == 30)
 		{
 			dogsChecks[2].SetActive(true);
 			currency.addIncome(500);
+			totalChallengesFinished++;
 		}
 
 	}
@@ -92,35 +81,29 @@ public class Challenges : MonoBehaviour
 		{
 			hooligansChecks[0].SetActive(true);
 			currency.addIncome(20);
+			totalChallengesFinished++;
 		}
 		else if(totalHooligansCaught == 6)
 		{
 			hooligansChecks[1].SetActive(true);
 			currency.addIncome(50);
+			totalChallengesFinished++;
 		}
 		else if(totalHooligansCaught == 10)
 		{
 			hooligansChecks[2].SetActive(true);
 			currency.addIncome(150);
+			totalChallengesFinished++;
 		}
 	}
 
 	public void happinessReached(int happiness)
 	{
-		if(happiness > 70 && happiness < 89)
+		if(happiness == 100)
 		{
-			happinessChecks[0].SetActive(true);
-			currency.addIncome(50);
-		}
-		else if(happiness > 90 && happiness < 99)
-		{
-			happinessChecks[1].SetActive(true);
-			currency.addIncome(150);
-		}
-		else if(happiness == 100)
-		{
-			happinessChecks[2].SetActive(true);
+			happinessCheck.SetActive(true);
 			currency.addIncome(250);
+			totalChallengesFinished++;
 		}
 	}
 
@@ -130,21 +113,40 @@ public class Challenges : MonoBehaviour
 		{
 			levelChecks[0].SetActive(true);
 			currency.addIncome(20);
+			totalChallengesFinished++;
+
 		}
 		else if (level == 4)
 		{
 			levelChecks[1].SetActive(true);
 			currency.addIncome(50);
+			totalChallengesFinished++;
 		}
 		else if(level == 6)
 		{
 			levelChecks[0].SetActive(true);
 			currency.addIncome(100);
+			totalChallengesFinished++;
 		}
 	}
 
 	public void showChallengeBoard(bool set)
 	{
 		challengeBoard.SetActive(set);
+	}
+
+	void checkEndGame()
+	{
+		if(totalChallengesFinished == 13)
+		{
+			endScreen.gameObject.SetActive(true);
+
+			Invoke("hideEndGame", 5);
+		}
+	}
+
+	void hideEndGame()
+	{
+		endScreen.gameObject.SetActive(false);
 	}
 }
