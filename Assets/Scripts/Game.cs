@@ -590,7 +590,7 @@ public class Game : MonoBehaviour
 			{
 				tile.GetComponent<Renderer>().materials[1].color = new Color32(196, 136, 75, 1);
 				tile.isPath = true;
-
+				tile.IsAccessible = false;
 				vis.addPath(tile);
 
 				currency.takeIncome(pathCost);
@@ -620,24 +620,23 @@ public class Game : MonoBehaviour
 					{
 						if (tile.GetComponentInParent<Paddock>().addDogs())
 						{
-							if (!tile.hasDog)
-							{
-								dogClone = dog.spawnDog();
-								dogClone.transform.position = tile.Position;
 
-								//Assign the paddock to the dog
-								dogB = dogClone.GetComponentInChildren<DogBehaviour>();
-								dogB.setTile(tile);
-								dogB.setPaddock(tile.GetComponentInParent<Paddock>().getPaddock());
-								dogB.setPaddockTiles(tile.GetComponentInParent<Paddock>().getPaddockTiles());
+							dogClone = dog.spawnDog();
+							dogClone.transform.position = tile.Position;
 
-								interactingPaddock = mRaycastHits[0].transform.GetComponentInParent<Paddock>().getPaddock();
+							//Assign the paddock to the dog
+							dogB = dogClone.GetComponentInChildren<DogBehaviour>();
+							dogB.setTile(tile);
+							dogB.setPaddock(tile.GetComponentInParent<Paddock>().getPaddock());
+							dogB.setPaddockTiles(tile.GetComponentInParent<Paddock>().getPaddockTiles());
 
-								placingDog = false;
+							interactingPaddock = mRaycastHits[0].transform.GetComponentInParent<Paddock>().getPaddock();
 
-								currency.takeIncome(dogCost);
-								level.addExp(standardExp);
-							}
+							placingDog = false;
+
+							currency.takeIncome(dogCost);
+							level.addExp(standardExp);
+
 						}
 					}
 				}
@@ -711,6 +710,7 @@ public class Game : MonoBehaviour
 				else if (tile.isPath)
 				{
 					tile.isPath = false;
+					tile.IsAccessible = true;
 					int ran = Random.Range(0, grassColours.Count);
 					tile.GetComponent<Renderer>().materials[1].color = grassColours[ran];
 					currency.addIncome(pathCost);
@@ -786,6 +786,7 @@ public class Game : MonoBehaviour
 					spawnedVisitors = true;
 				}
 
+				//Position camera at the starting tile
 				cam.transform.position = new Vector3(-105, 150, -325);
 			}
         }

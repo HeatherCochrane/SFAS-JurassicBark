@@ -12,8 +12,6 @@ public class EnvironmentTile : MonoBehaviour
     public bool Visited { get; set; }
     public bool IsAccessible { get; set; }
 	public bool isPaddock { get; set; }
-	public bool isAccessibleAnimal { get; set; }
-	public bool hasDog { get; set; }
 	public bool isPath { get; set; }
 
 }

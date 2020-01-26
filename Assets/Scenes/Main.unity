@@ -4942,7 +4942,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0.11328125, y: 0.03125, z: 0.02734375, w: -0.03125}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -6288,7 +6288,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 273.4358}
+  m_AnchoredPosition: {x: 0, y: 284.6}
   m_SizeDelta: {x: 0, y: 672.6}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &917276175
@@ -12261,7 +12261,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2138797221}
   m_HandleRect: {fileID: 2138797220}
   m_Direction: 2
-  m_Value: 0.039227743
+  m_Value: 0.00000010722973
   m_Size: 0.5768659
   m_NumberOfSteps: 0
   m_OnValueChanged:

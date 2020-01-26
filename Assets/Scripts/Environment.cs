@@ -21,12 +21,12 @@ public class Environment : MonoBehaviour
     public EnvironmentTile Start { get; private set; }
 
 
-
-    private void Awake()
+	private void Awake()
     {
         mAll = new List<EnvironmentTile>();
         mToBeTested = new List<EnvironmentTile>();
-    }
+
+	}
 
     private void OnDrawGizmos()
     {
@@ -124,7 +124,7 @@ public class Environment : MonoBehaviour
         }
     }
 
-    private void SetupConnections()
+	private void SetupConnections()
     {
         // Currently we are only setting up connections between adjacnt nodes
         for (int x = 0; x < Size.x; ++x)
@@ -179,7 +179,7 @@ public class Environment : MonoBehaviour
 
     public void GenerateWorld()
     {
-        Generate();
+		Generate();
         SetupConnections();
     }
 
