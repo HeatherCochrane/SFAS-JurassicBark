@@ -128,7 +128,7 @@ public class Challenges : MonoBehaviour
 		}
 		else if(level == 6)
 		{
-			levelChecks[0].SetActive(true);
+			levelChecks[2].SetActive(true);
 			currency.addIncome(100);
 			totalChallengesFinished++;
 		}
