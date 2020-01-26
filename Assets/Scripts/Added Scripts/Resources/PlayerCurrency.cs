@@ -7,7 +7,7 @@ public class PlayerCurrency : MonoBehaviour
 {
 
 	//Starting amount
-	int totalIncome = 10000;
+	int totalIncome = 250;
 	int remainingFunds = 0;
 
 	public Text money;
